@@ -4,7 +4,7 @@ import requests
 
 
 #ldygo=os.getenv("loseprivacy")
-ldygo=cookie
+ldygo=loseprivacy
 
 session = requests.Session()
 url = 'https://loseprivacy.icu/checkin' 
