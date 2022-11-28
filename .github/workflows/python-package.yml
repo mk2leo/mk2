@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     # 存放 check-bats-version 作业中的所有Step
     steps:
-      # step-no.1: 运行actions/checkout@v3操作，操作一般用uses来调用，
+      # step-no.1: 运行actions/BA.py@v3操作，操作一般用uses来调用，
       # 一般用于处理一些复杂又频繁的操作例如拉取分支，安装插件
       # 此处 actions/checkout 操作是从仓库拉取代码到Runner里的操作
       - uses: actions/checkout@v3
