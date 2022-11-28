@@ -1,40 +1,26 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
-name: Python package
-
+# 指定工作流程的名称
+name: learn-github-actions
+# 指定此工作流程的触发事件Event。 此示例使用 推送 事件，即执行push后，触发该流水线的执行
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
+    workflow_dispatch:
+# 存放 learn-github-actions 工作流程中的所有Job
 jobs:
-  build:
-
+  # 指定一个Job的名称为check-bats-version
+  check-bats-version:
+    # 指定该Job在最新版本的 Ubuntu Linux 的 Runner(运行器)上运行
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.8", "3.9", "3.10"]
-
+    # 存放 check-bats-version 作业中的所有Step
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        python -m pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
+      # step-no.1: 运行actions/checkout@v3操作，操作一般用uses来调用，
+      # 一般用于处理一些复杂又频繁的操作例如拉取分支，安装插件
+      # 此处 actions/checkout 操作是从仓库拉取代码到Runner里的操作
+      - uses: actions/checkout@v3
+      # step-no.2: actions/setup-node@v3 操作来安装指定版本的 Node.js，此处指定安装的版本为v14
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "14"
+      # step-no.3: 运行命令行下载bats依赖到全局环境中
+      - run: npm install -g bats
+      # step-no.4: 运行命令行查看bats依赖的版本
+      - run: bats -v
+
