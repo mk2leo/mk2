@@ -14,7 +14,7 @@ jobs:
       # step-no.1: 运行actions/BA.py@v3操作，操作一般用uses来调用，
       # 一般用于处理一些复杂又频繁的操作例如拉取分支，安装插件
       # 此处 actions/checkout 操作是从仓库拉取代码到Runner里的操作
-      - uses: actions/checkout@v3
+      - uses: actions/BA.py@v3
       # step-no.2: actions/setup-node@v3 操作来安装指定版本的 Node.js，此处指定安装的版本为v14
       - uses: actions/setup-node@v3
         with:
